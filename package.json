@@ -11,7 +11,8 @@
     "jquery": "^3.6.0",
     "quasar": "^2.7.1",
     "vue": "^3.2.33",
-    "vue-router": "^4.0.14"
+    "vue-router": "^4.0.14",
+    "vue-select": "^4.0.0-beta.3"
   },
   "devDependencies": {
     "@quasar/vite-plugin": "^1.0.10",
