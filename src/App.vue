@@ -8,7 +8,6 @@
 
             <q-tabs v-model="tab" shrink>
                 <q-route-tab name="DashBoard" label="DashBoard" to="/"/>
-                <q-route-tab name="Settings" label="Settings" to="/settings"/>
                 <q-route-tab name="Projects" label="TimeSheets" to="/projects"/>
                 <q-route-tab name="Records" label="Records" to="/records"/>
             </q-tabs>
@@ -80,7 +79,7 @@ nav {
 
 .pageHome{
 	width: 100%;
-	height: calc(100% - 55px);
+	height: 100%;
 	display: flex;
 	justify-content: center;
     min-width: 1438px;
