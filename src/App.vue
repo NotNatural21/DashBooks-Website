@@ -1,119 +1,98 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from '@/components/HelloWorld.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <nav>
+        <div>
+            <q-toolbar class="bg-primary text-white shadow-2 glossy">
+            <q-btn flat label="Download Save" @click=""/>
+            <q-btn flat label="Load" @click=""/>
+            <q-space />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+            <q-tabs v-model="tab" shrink>
+                <q-route-tab name="DashBoard" label="DashBoard" to="/"/>
+                <q-route-tab name="Settings" label="Settings" to="/settings"/>
+                <q-route-tab name="Projects" label="TimeSheets" to="/projects"/>
+                <q-route-tab name="Records" label="Records" to="/records"/>
+            </q-tabs>
+            </q-toolbar>
+        </div>
+    </nav>
+    <router-view />
 </template>
 
+<script>
+import { ref } from 'vue'
+export default {
+    name: 'App',
+    components: {
+    },
+    data() {
+        return {
+		}
+    },
+    setup () {
+        return {
+            tab: ref('')
+        }
+    },
+    mounted(){
+    },
+    methods: {
+
+    }
+}
+</script>
+
+
 <style>
-@import '@/assets/base.css';
-
+@import url('../public/root.css');
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-
-  font-weight: normal;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    background-color: #f4f5f8;
+    height: 100vh;
+    margin-top: var(--navbar_height);
 }
 
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-}
-
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+@media only screen and (max-width: 1438px) {
+    #app {
+        height: calc(100vh - var(--navbar_height));
+        overflow-x: scroll;
+    }
 }
 
 nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+    position: fixed;
+	z-index: 999;
+	top: 0px;
+	right: 0px;
+	left: 0px;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+	height: var(--navbar_height);
+	font-family: 'Lato';
+	font-size: 0.9em;
+    color: white;
+	background-color: white;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.pageHome{
+	width: 100%;
+	height: calc(100% - 55px);
+	display: flex;
+	justify-content: center;
+    min-width: 1438px;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+p{
+    margin: 0px !important;
 }
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+h4{
+    margin: 0px;
 }
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
-
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.active_button{
+    border: 3px solid black;
 }
 </style>
