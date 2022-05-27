@@ -1,6 +1,6 @@
-# DashBooks-Website
+# DashBooks
 
-This template should help get you started developing with Vue 3 in Vite.
+## This is the limited website version for the desktop application, DashBooks
 
 ## Recommended IDE Setup
 
