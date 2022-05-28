@@ -10,8 +10,8 @@
 							<div>
 								<q-btn-dropdown color="primary" label="Years">
 								<q-list>
-									<template v-for="yearID in years" :key="yearID">
-										<q-item clickable v-close-popup @click="loadNetData" :data="yearID">
+									<template v-for="yearID in Object.keys(userObj['records'])" :key="yearID">
+										<q-item clickable v-close-popup @click="loadNetData" :data="yearID" v-if="yearID != 'accounts' && yearID != 'categories' && yearID != 'payee' && yearID != 'savedTransactions'">
 											<q-item-section style="pointer-events: none;">
 												<q-item-label style="pointer-events: none;">{{ yearID }}</q-item-label>
 											</q-item-section>
@@ -37,8 +37,8 @@
 							<div>
 								<q-btn-dropdown color="primary" label="Years">
 								<q-list>
-									<template v-for="yearID in years" :key="yearID">
-										<q-item clickable v-close-popup @click="loadNetData" :data="yearID">
+									<template v-for="yearID in Object.keys(userObj['records'])" :key="yearID">
+										<q-item clickable v-close-popup @click="loadNetData" :data="yearID" v-if="yearID != 'accounts' && yearID != 'categories' && yearID != 'payee' && yearID != 'savedTransactions'">
 											<q-item-section style="pointer-events: none;">
 												<q-item-label style="pointer-events: none;">{{ yearID }}</q-item-label>
 											</q-item-section>
@@ -64,8 +64,8 @@
 							<div>
 								<q-btn-dropdown color="primary" label="Years">
 								<q-list>
-									<template v-for="yearID in years" :key="yearID">
-										<q-item clickable v-close-popup @click="loadNetData" :data="yearID">
+									<template v-for="yearID in Object.keys(userObj['records'])" :key="yearID">
+										<q-item clickable v-close-popup @click="loadNetData" :data="yearID" v-if="yearID != 'accounts' && yearID != 'categories' && yearID != 'payee' && yearID != 'savedTransactions'">
 											<q-item-section style="pointer-events: none;">
 												<q-item-label style="pointer-events: none;">{{ yearID }}</q-item-label>
 											</q-item-section>
@@ -87,7 +87,7 @@
 				</div>
                 <div id="project_container">
                     <div class="inner_project_tiles">
-                        <template v-for="(item, keys) in projectDict" :key="keys">
+                        <template v-for="(item, keys) in userObj['projects']" :key="keys">
                             <div class="tile">
                                 <div class="top_display">
                                     <p style="font-size:x-large; border-bottom: 1px solid black;">{{ item.name }}</p>
@@ -144,7 +144,7 @@ export default {
             incomeSum: {},
 			total: 0,
 			years: [],
-            projectDict: {},
+            userObj: userDict,
             showTotal: false,
             loaded: false
 		}
@@ -158,13 +158,6 @@ export default {
         }else{
             this.currentYear = `${thisYear} - ${thisYear + 1}`;
         }
-		for(const objKey of Object.keys(userDict['records'])){
-			if(objKey != 'accounts' && objKey != 'categories' && objKey != 'payee' && objKey != 'savedTransactions'){
-				this.years.push(objKey)
-			}
-            
-		}
-        this.projectDict = {...userDict['projects']}
         this.netData.income = 0;
         this.netData.expenses = 0;
         this.expenseSum = {};

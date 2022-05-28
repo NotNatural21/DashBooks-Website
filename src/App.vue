@@ -3,13 +3,13 @@
         <div>
             <q-toolbar class="bg-primary text-white shadow-2 glossy">
             <q-btn flat label="Download Save" @click=""/>
-            <q-btn flat label="Load" @click=""/>
+            <input type="file" ref="file" style="display: none" accept=".ssdb" @change="readFile()">
+            <q-btn flat label="Load Save" @click="$refs.file.click()"/>
             <q-space />
 
             <q-tabs v-model="tab" shrink>
-                <q-route-tab name="DashBoard" label="DashBoard" to="/"/>
-                <q-route-tab name="Projects" label="TimeSheets" to="/projects"/>
-                <q-route-tab name="Records" label="Records" to="/records"/>
+                <q-route-tab name="DashBoard" label="DashBoard" to="/DashBooks"/>
+                <q-route-tab name="Projects" label="TimeSheets" to="/DashBooks/projects"/>
             </q-tabs>
             </q-toolbar>
         </div>
@@ -19,12 +19,16 @@
 
 <script>
 import { ref } from 'vue'
+import { userDict, saveChecker } from './main.js';
 export default {
     name: 'App',
     components: {
     },
     data() {
         return {
+            file: null,
+            contents: null,
+            fileLoaded: false
 		}
     },
     setup () {
@@ -35,7 +39,24 @@ export default {
     mounted(){
     },
     methods: {
-
+        readFile() {
+            /**/
+            this.file = this.$refs.file.files[0];
+            const fr = new FileReader();
+            console.log("this")
+            fr.onload = e => {
+                const data = JSON.parse(e.target.result);
+                console.log(data)
+                const result = saveChecker(data);
+                for(const[key, entry] of Object.entries(result)){
+                    userDict[key] = entry;
+                }
+                this.contents = result;
+                console.log(this.contents)
+                console.log(userDict)
+            }
+            fr.readAsText(this.file);
+        }
     }
 }
 </script>
