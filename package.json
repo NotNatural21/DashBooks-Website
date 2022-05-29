@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "deploy": "node scripts/gh-pages-deploy.js",
     "preview": "vite preview --port 5050"
   },
   "dependencies": {
