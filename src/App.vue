@@ -8,8 +8,8 @@
             <q-space />
 
             <q-tabs v-model="tab" shrink>
-                <q-route-tab name="DashBoard" label="DashBoard" to="/DashBooks"/>
-                <q-route-tab name="Projects" label="TimeSheets" to="/DashBooks/projects"/>
+                <q-route-tab name="DashBoard" label="DashBoard" to="/"/>
+                <q-route-tab name="Projects" label="TimeSheets" to="/projects"/>
             </q-tabs>
             </q-toolbar>
         </div>
