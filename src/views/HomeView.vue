@@ -27,7 +27,7 @@
 						</div>
                         <div class="bar_grapgh" style="overflow-y: auto; justify-content: flex-start; margin-top: 10px;">
                             <template v-for="(item, keys) in incomeSum" :key="keys">
-                                <div class="incomeBar" :style="{width: `${(350 * Math.abs(item / netData.income))}px`}">{{ keys }}: {{ item }}</div>
+                                <div class="incomeBar" :style="{width: `${(90 * Math.abs(item / netData.income))}%`}">{{ keys }}: {{ item }}</div>
                             </template>
 						</div>
                     </div>
@@ -54,7 +54,7 @@
 						</div>
                         <div class="bar_grapgh" style="overflow-y: auto; justify-content: flex-start; margin-top: 10px;">
                             <template v-for="(item, keys) in expenseSum" :key="keys">
-                                <div class="expenseBar" :style="{width: `${(350 * Math.abs(item / netData.expenses))}px`}">{{ keys }}: {{ item }}</div>
+                                <div class="expenseBar" :style="{width: `${(100 * Math.abs(item / netData.expenses))}%`}">{{ keys }}: {{ item }}</div>
                             </template>
 						</div>
                     </div>
@@ -80,8 +80,8 @@
                             <p>Net Profit for {{ currentYear }}</p>
 						</div>
 						<div class="bar_grapgh" style="height: 160px">
-                            <div class="incomeBar" :style="{width: `${(Math.min(370 * Math.abs(netData.income / netData.expenses), 370))}px`}">Income: &nbsp; &nbsp; ${{ numberWithCommas(netData.income) }}</div>
-                            <div class="expenseBar" :style="{width: `${(Math.min(370 * Math.abs(netData.expenses / netData.income), 370))}px`}">Expenses: ${{ numberWithCommas(netData.expenses) }}</div>
+                            <div class="incomeBar" :style="{width: `${(Math.min(100 * Math.abs(netData.income / netData.expenses), 90))}%`}">Income: &nbsp; &nbsp; ${{ numberWithCommas(netData.income) }}</div>
+                            <div class="expenseBar" :style="{width: `${(Math.min(100 * Math.abs(netData.expenses / netData.income), 90))}%`}">Expenses: ${{ numberWithCommas(netData.expenses) }}</div>
 						</div>
 					</div>
 				</div>
@@ -228,25 +228,23 @@ export default {
 .inner{
 	margin: 10px;
 	width: 100%;
-	height: 98%;
+    height: 98%;
 	
 }
 #tile_container{
 	width: 100%;
-	height: 92%;
 	padding-top: 10px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
 }
 
 #tile_container > div{
 	display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     margin-bottom: 15px;
-    min-height: 280px;
-    width: 100%;
-    overflow-x: auto;
+    width: 95%;
     gap: 40px;
 }
 
@@ -259,9 +257,11 @@ export default {
     display: flex;
     justify-content: center;
     width: fit-content;
+    flex-wrap: wrap;
     min-width: 100%;
     gap: 40px;
     height: 100%;
+    align-items: center;
 }
 
 h4{
@@ -269,10 +269,11 @@ h4{
 }
 
 .tile{
-	width: 400px;
-	min-width: 400px;
-	height: 100%;
-    min-height: 280px;
+	min-width: 230px;
+	width: 90%;
+    max-width: 400px;
+    min-height: 240px;
+	height: 240px;
     margin: 0px 15px;
 	background-color: white;
 	box-shadow: 2px 4px 10px -4px #000000a4;
@@ -351,7 +352,7 @@ p{
 .week > p:first-child{
     display: flex;
     justify-content: flex-end;
-    width: 40%;
+    width: 30%;
 }
 
 .week_total{

@@ -4,7 +4,7 @@
     <div class="pageHome">
         <div class="item_container">
             <div class="items">
-                <div v-for="(projectDict, projectID) in userObj['projects']" :key="projectDict" class="list_item" :data="projectID" @click="$router.push({ name: 'timesheet', params: { 'projectID': projectID } })" :style="{background: `radial-gradient(circle, ${projectDict['colour'][1]} 0%, ${projectDict['colour'][0]} 30%)`, color: `${pickTextColorBasedOnBgColor(projectDict['colour'][1])}`}">
+                <div v-for="(projectDict, projectID) in userObj['projects']" :key="projectDict" class="list_item" :data="projectID" @click="$router.push({ name: 'timesheet', params: { 'projectID': projectID } })" :style="{background: `radial-gradient(circle, ${projectDict['colour'][1]} 0%, ${projectDict['colour'][0]} 60%)`, color: `${pickTextColorBasedOnBgColor(projectDict['colour'][1])}`}">
                     <div>
                         <p>{{ projectDict.name }}</p>
                         <p style="font-size: small;">Duration: {{ projectDict.duration }} Weeks</p>
@@ -62,7 +62,7 @@ export default {
 <style scoped>
 .item_container{
     width: 100%;
-    height: calc(100vh - var(--navbar_height) - 150px - 18px);
+    height: calc(100vh - var(--navbar_height) - 70px);
     overflow-y: auto;
 }
 .items{

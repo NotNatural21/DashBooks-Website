@@ -2,14 +2,13 @@
     <nav>
         <div>
             <q-toolbar class="bg-primary text-white shadow-2 glossy">
-            <q-btn flat label="Download Save" @click=""/>
             <input type="file" ref="file" style="display: none" accept=".ssdb" @change="readFile()">
             <q-btn flat label="Load Save" @click="$refs.file.click()"/>
             <q-space />
-
             <q-tabs v-model="tab" shrink>
                 <q-route-tab name="DashBoard" label="DashBoard" to="/"/>
                 <q-route-tab name="Projects" label="TimeSheets" to="/projects"/>
+                <q-route-tab name="Invoice" label="Invoice" to="/invoice"/>
             </q-tabs>
             </q-toolbar>
         </div>
@@ -74,13 +73,6 @@ export default {
     margin-top: var(--navbar_height);
 }
 
-@media only screen and (max-width: 1438px) {
-    #app {
-        height: calc(100vh - var(--navbar_height));
-        overflow-x: scroll;
-    }
-}
-
 nav {
     position: fixed;
 	z-index: 999;
@@ -100,10 +92,10 @@ nav {
 
 .pageHome{
 	width: 100%;
-	height: 100%;
+	height: calc(100vh - var(--navbar_height) - 20px);
+    overflow-y: scroll;
 	display: flex;
 	justify-content: center;
-    min-width: 1438px;
 }
 
 p{
