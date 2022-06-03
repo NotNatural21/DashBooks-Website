@@ -9,8 +9,8 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink to="/" @click="closeMenu" ><img :src="HomeIcon"/>DashBoard</RouterLink>
         <RouterLink to="/projects" @click="closeMenu" ><img :src="Work"/>TimeSheets</RouterLink>
         <RouterLink to="/invoice" @click="closeMenu" ><img :src="Invoice"/>Invoice</RouterLink>
-        <a @click="closeMenu, $refs.file.click()" ><img :src="Upload"/>Load Save</a>
-        <input type="file" ref="file" style="display: none" accept=".ssdb" @change="readFile()">
+        <input type="file" ref="fileUpload" style="display: none" accept=".ssdb" @change="readFile()">
+        <a @click="closeMenu, $refs.fileUpload.click()" ><img :src="Upload"/>Load Save</a>
         
     </div>
     <RouterView />

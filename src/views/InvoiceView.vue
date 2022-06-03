@@ -158,7 +158,6 @@
 
 <script>
 import { userDict } from '../main.js'
-import { generateID } from '../../public/generalFunctions.js';
 import $ from 'jquery'
 export default {
     name: 'InvoiceView',
