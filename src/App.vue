@@ -51,7 +51,7 @@ export default {
             }
         },
         readFile() {
-            this.file = this.$refs.file.files[0];
+            this.file = this.$refs.fileUpload.files[0];
             const fr = new FileReader();
             fr.onload = e => {
                 const data = JSON.parse(e.target.result);
