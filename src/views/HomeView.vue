@@ -92,7 +92,7 @@
                                 <div class="top_display">
                                     <p style="font-size:x-large; border-bottom: 1px solid black;">{{ item.name }}</p>
                                 </div>
-                                WEEKS:
+                                <p>WEEKS:</p>
                                 <div class="weeks_container">
                                     <div class="inner_weeks">
                                         <template v-for="(weekDict, week) in item.weeks" :key="week">
@@ -218,6 +218,7 @@ export default {
                     this.expenseSum[objDict.category] += objDict.amount 
 				}
 			}
+            
 		}
 	}
 }
@@ -279,6 +280,11 @@ h4{
 	box-shadow: 2px 4px 10px -4px #000000a4;
     border: 1px solid $accent;
     border-radius: 0.3rem;
+}
+
+.tile > p{
+    display: flex;
+    justify-content: center;
 }
 
 .top_display{
@@ -352,7 +358,6 @@ p{
 .week > p:first-child{
     display: flex;
     justify-content: flex-end;
-    width: 30%;
 }
 
 .week_total{

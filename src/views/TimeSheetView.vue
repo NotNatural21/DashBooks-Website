@@ -499,6 +499,7 @@ export default {
     display: flex;
     align-items: center;
 	justify-content: center;
+    width: 100%;
 }
 #top_title{
     margin-top: 5px;
@@ -614,6 +615,10 @@ export default {
 	border-left: 1px solid black;
 	border-top: 1px solid black;
     margin-top: 10px;
+}
+.timesheet_column > div{
+	display: flex;
+    justify-content: center;
 }
 .timesheet_column:nth-child(1){
 	left: 0px;
