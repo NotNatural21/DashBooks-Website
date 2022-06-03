@@ -1,24 +1,29 @@
+<script setup>
+import { RouterLink, RouterView } from 'vue-router'
+</script>
 <template>
-    <nav>
-        <div>
-            <q-toolbar class="bg-primary text-white shadow-2 glossy">
-            <input type="file" ref="file" style="display: none" accept=".ssdb" @change="readFile()">
-            <q-btn flat label="Load Save" @click="$refs.file.click()"/>
-            <q-space />
-            <q-tabs v-model="tab" shrink>
-                <q-route-tab name="DashBoard" label="DashBoard" to="/"/>
-                <q-route-tab name="Projects" label="TimeSheets" to="/projects"/>
-                <q-route-tab name="Invoice" label="Invoice" to="/invoice"/>
-            </q-tabs>
-            </q-toolbar>
+    <div id="nav" @click="$event.stopPropagation()">
+        <div class="menuImg">
+            <img :src="ArrowMenu" id="arrowMenuImg" @click="toggleMenu" class="rotate">
         </div>
-    </nav>
-    <router-view />
+        <RouterLink to="/" @click="closeMenu" ><img :src="HomeIcon"/>DashBoard</RouterLink>
+        <RouterLink to="/projects" @click="closeMenu" ><img :src="Work"/>TimeSheets</RouterLink>
+        <RouterLink to="/invoice" @click="closeMenu" ><img :src="Invoice"/>Invoice</RouterLink>
+        <a @click="closeMenu, $refs.file.click()" ><img :src="Upload"/>Load Save</a>
+        <input type="file" ref="file" style="display: none" accept=".ssdb" @change="readFile()">
+        
+    </div>
+    <RouterView />
 </template>
 
 <script>
-import { ref } from 'vue'
+import ArrowMenu from './components/Icons/ArrowMenu.svg'
+import HomeIcon from './components/Icons/HomeIcon.svg'
+import Work from './components/Icons/Work.svg'
+import Invoice from './components/Icons/Invoice.svg'
+import Upload from './components/Icons/Upload.svg'
 import { userDict, saveChecker } from './main.js';
+import $ from 'jquery';
 export default {
     name: 'App',
     components: {
@@ -30,19 +35,24 @@ export default {
             fileLoaded: false
 		}
     },
-    setup () {
-        return {
-            tab: ref('')
-        }
-    },
     mounted(){
+        window.addEventListener('click', function() {
+            this.closeMenu()
+        }.bind(this))
     },
     methods: {
+        toggleMenu(){
+            $('#arrowMenuImg').toggleClass('rotate')
+            $('#nav').toggleClass('clicked');
+        },
+        closeMenu(){
+            if($('#nav').hasClass('clicked')){
+                this.toggleMenu();
+            }
+        },
         readFile() {
-            /**/
             this.file = this.$refs.file.files[0];
             const fr = new FileReader();
-            console.log("this")
             fr.onload = e => {
                 const data = JSON.parse(e.target.result);
                 console.log(data)
@@ -63,39 +73,81 @@ export default {
 
 <style>
 @import url('../public/root.css');
-#app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    background-color: #f4f5f8;
+@import '@/assets/base.css';
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+#app{
+    width: 100%;
     height: 100vh;
-    margin-top: var(--navbar_height);
+    display: flex;
+    background-color: white;
 }
 
-nav {
+#nav{
+    width : 60px;
+    min-width : 60px;
+    height: 100vh;
+    background-color: var(--color-primary);
+    display: flex;
+    flex-direction: column;
     position: fixed;
-	z-index: 999;
-	top: 0px;
-	right: 0px;
-	left: 0px;
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: space-between;
-	align-items: center;
-	height: var(--navbar_height);
-	font-family: 'Lato';
-	font-size: 0.9em;
+    z-index: 1000;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    transition: min-width 1s;
+    gap: 25px;
+    padding-left: 6px;
+    padding-right: 6px;
+    overflow-x: hidden;
+}
+
+#nav.clicked{
+    min-width: 225px;
+    align-items: unset;
+}
+
+#nav > a{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 10px;
     color: white;
-	background-color: white;
+    text-decoration: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+}
+
+#nav > a:hover{
+    background-color: var(--color-primary-highlight);
+}
+
+#arrowMenuImg{
+    width: 52px;
+    height: 52px;
+    cursor: pointer;
+}
+
+.menuImg{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.rotate{
+    transform: rotate(180deg);
 }
 
 .pageHome{
-	width: 100%;
-	height: calc(100vh - var(--navbar_height) - 20px);
+	width: calc(100% - 60px);
+    height: 100vh;
     overflow-y: scroll;
-	display: flex;
-	justify-content: center;
+    display: flex;
+    justify-content: center;
+    color: black;
+    margin-left: auto;
+    padding: 10px;
+    flex-direction: column;
+    align-items: center;
 }
 
 p{
@@ -103,6 +155,8 @@ p{
 }
 h4{
     margin: 0px;
+    display: flex;
+    justify-content: center;
 }
 .active_button{
     border: 3px solid black;

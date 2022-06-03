@@ -1,7 +1,7 @@
 <template>
-    <h4>TimeSheets:</h4>
-    <p>You have logged {{ userObj['timeLogged'][today]['hours'].toFixed(2) }}H and earnt ${{ userObj['timeLogged'][today]['pay'] }} today</p>
     <div class="pageHome">
+        <h4>TimeSheets:</h4>
+        <p>You have logged {{ userObj['timeLogged'][today]['hours'].toFixed(2) }}H and earnt ${{ userObj['timeLogged'][today]['pay'] }} today</p>
         <div class="item_container">
             <div class="items">
                 <div v-for="(projectDict, projectID) in userObj['projects']" :key="projectDict" class="list_item" :data="projectID" @click="$router.push({ name: 'timesheet', params: { 'projectID': projectID } })" :style="{background: `radial-gradient(circle, ${projectDict['colour'][1]} 0%, ${projectDict['colour'][0]} 60%)`, color: `${pickTextColorBasedOnBgColor(projectDict['colour'][1])}`}">

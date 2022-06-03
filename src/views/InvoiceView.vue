@@ -1,79 +1,82 @@
 <template>
     <!-- Invoice Selector -->
-	<div class="form_container">
-        <div class="form" style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%);">
-            <div id="top">
-                <div class="side">
-                    <label for="amount_projects_invoice">Number of Projects To Invoice:</label>
-                    <template v-if="isProjects">
-                        <select id="amount_projects_invoice" @change="changeProjectNum" style="margin: 0px 0px 10px;">
-                            <option v-for="(projID, index) in projectKeys" :key="projID">
-                                {{ index + 1 }}
-                            </option>
-                        </select>
-                    </template>
-                    <template v-else>
-                        <div class="advisory">Go To Settings To Create A Project</div>
-                    </template>
-                    <div class="project_selection_container">
+    <div class="pageHome">
+
+        <div class="form_container">
+            <div class="form" style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%);">
+                <div id="top">
+                    <div class="side">
+                        <label for="amount_projects_invoice">Number of Projects To Invoice:</label>
                         <template v-if="isProjects">
-                            <template v-for="(n, index) in parseInt(amountOfProjects)" :key="index">
-                                <div class="selection_select">
-                                    <label :for="`project_selection_${n}`">Choose a Project and Week:</label>
-                                    <select :id="`project_selection_${n}`" @change="checkInvoice">
-                                        <template v-for="(projDict, projID) in userObj['projects']" :key="projDict" >
-                                            <template v-for="(weekDict, weekID) in projDict['weeks']" :key="weekID">
-                                                <option :data="projID" :weekid="weekID">{{ projDict.name }} : {{ weekID }}</option>
-                                            </template>
-                                        </template>
-                                    </select>
-                                    <p style="color: white" :id="`invoice_selection_alert_${n}`"></p>
-                                </div>
-                            </template>
+                            <select id="amount_projects_invoice" @change="changeProjectNum" style="margin: 0px 0px 10px;">
+                                <option v-for="(projID, index) in projectKeys" :key="projID">
+                                    {{ index + 1 }}
+                                </option>
+                            </select>
                         </template>
+                        <template v-else>
+                            <div class="advisory">Go To Settings To Create A Project</div>
+                        </template>
+                        <div class="project_selection_container">
+                            <template v-if="isProjects">
+                                <template v-for="(n, index) in parseInt(amountOfProjects)" :key="index">
+                                    <div class="selection_select">
+                                        <label :for="`project_selection_${n}`">Choose a Project and Week:</label>
+                                        <select :id="`project_selection_${n}`" @change="checkInvoice">
+                                            <template v-for="(projDict, projID) in userObj['projects']" :key="projDict" >
+                                                <template v-for="(weekDict, weekID) in projDict['weeks']" :key="weekID">
+                                                    <option :data="projID" :weekid="weekID">{{ projDict.name }} : {{ weekID }}</option>
+                                                </template>
+                                            </template>
+                                        </select>
+                                        <p style="color: white" :id="`invoice_selection_alert_${n}`"></p>
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+                    </div>
+                    <div class="side">
+                        <label for="user_selection">Choose a User:</label>
+                        <template v-if="isUsers">
+                            <select id="user_selection">
+                                <option v-for="(userDict, userID) in userObj['users']" :key="userDict" :data="userID">
+                                    {{ userDict['user'] }}
+                                </option>
+                            </select>
+                        </template>
+                        <template v-else>
+                            <div class="advisory">Go To Settings To Create A User</div>
+                        </template>
+                        
+                        <label for="client_selection">Choose a Client:</label>
+                        <template v-if="isClients">
+                            <select id="client_selection">
+                                <option v-for="(projDict, projID) in userObj['clients']" :key="projDict" :data="projID">
+                                    {{ projDict['client'] }}
+                                </option>
+                            </select>
+                        </template>
+                        <template v-else>
+                            <div class="advisory">Go To Settings To Create A Client</div>
+                        </template>
+    
+                        <label for="invoice_date">Invoice Date:</label>
+                        <input id="invoice_date" type="date" />
+    
+                        <label for="invoice_for">Invoice For:</label>
+                        <input id="invoice_for" type="text" />
+                        
+                        <label for="invoice_ID">Invoice ID:</label>
+                        <input id="invoice_ID" type="text" />
+                        
+                        <label for="invoice_include_colours">Include All Colours:</label>
+                        <input id="invoice_include_colours" type="checkbox" />
                     </div>
                 </div>
-                <div class="side">
-                    <label for="user_selection">Choose a User:</label>
-                    <template v-if="isUsers">
-                        <select id="user_selection">
-                            <option v-for="(userDict, userID) in userObj['users']" :key="userDict" :data="userID">
-                                {{ userDict['user'] }}
-                            </option>
-                        </select>
-                    </template>
-                    <template v-else>
-                        <div class="advisory">Go To Settings To Create A User</div>
-                    </template>
-                    
-                    <label for="client_selection">Choose a Client:</label>
-                    <template v-if="isClients">
-                        <select id="client_selection">
-                            <option v-for="(projDict, projID) in userObj['clients']" :key="projDict" :data="projID">
-                                {{ projDict['client'] }}
-                            </option>
-                        </select>
-                    </template>
-                    <template v-else>
-                        <div class="advisory">Go To Settings To Create A Client</div>
-                    </template>
-
-                    <label for="invoice_date">Invoice Date:</label>
-                    <input id="invoice_date" type="date" />
-
-                    <label for="invoice_for">Invoice For:</label>
-                    <input id="invoice_for" type="text" />
-                    
-                    <label for="invoice_ID">Invoice ID:</label>
-                    <input id="invoice_ID" type="text" />
-                    
-                    <label for="invoice_include_colours">Include All Colours:</label>
-                    <input id="invoice_include_colours" type="checkbox" />
-                </div>
-            </div>
-        <q-btn class="glossy" rounded color="primary" label="Print Invoice" @click="generateInvoice"/>
-        </div>	
-	</div>
+            <q-btn class="glossy" rounded color="primary" label="Print Invoice" @click="generateInvoice"/>
+            </div>	
+        </div>
+    </div>
 
 	<div id="invoice_page" style="display: none;">
 		<div id="PRINTtheTHING">
@@ -381,8 +384,9 @@ input {
 }
 
 .form_container {
-	position: absolute;
-	inset: 0px;
+	position: relative;
+    width: 100%;
+    height: 100vh;
 	opacity: 1;
 	display: flex;
 	justify-content: center;

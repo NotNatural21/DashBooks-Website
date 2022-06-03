@@ -227,7 +227,7 @@ export default {
 <style scoped lang="scss">
 .inner{
 	margin: 10px;
-	width: 100%;
+	width: 98%;
     height: 98%;
 	
 }
