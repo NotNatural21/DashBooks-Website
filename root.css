@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,300&display=swap');
+
+:root {
+	--navbar_height: 55px;
+	--navbar_menu_width: 150px;
+}
+
+html {
+	background-repeat: no-repeat;
+	overflow: hidden;
+	height: 100vh;
+}
+
+body {
+    margin: 0px;
+}
+
+
+/* Dim */
+::-webkit-scrollbar {
+	width: 15px;
+	height: 15px;
+    
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background-color: #FFFFFF23;
+	border-radius: 10px;
+	box-shadow: 0px 0px 9px -5px grey inset, 0px 4px 16px -16px black;
+	backdrop-filter: blur(7px);
+}
+
+::-webkit-scrollbar-corner {
+	background: rgba(0,0,0,0);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #050779; 
+	border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #6d19a9; 
+}
