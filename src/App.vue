@@ -6,11 +6,12 @@ import { RouterLink, RouterView } from 'vue-router'
         <div class="menuImg">
             <img :src="ArrowMenu" id="arrowMenuImg" @click="toggleMenu" class="rotate">
         </div>
+        <RouterLink to="/releases" @click="closeMenu" ><img :src="Releases"/>Releases</RouterLink>
         <RouterLink to="/" @click="closeMenu" ><img :src="HomeIcon"/>DashBoard</RouterLink>
         <RouterLink to="/projects" @click="closeMenu" ><img :src="Work"/>TimeSheets</RouterLink>
         <RouterLink to="/invoice" @click="closeMenu" ><img :src="Invoice"/>Invoice</RouterLink>
         <input type="file" ref="fileUpload" style="display: none" accept=".ssdb" @change="readFile()">
-        <a @click="closeMenu, $refs.fileUpload.click()" ><img :src="Upload"/>Load Save</a>
+        <a @click="closeMenu, $refs.fileUpload.click()" ><img :src="Upload"/>Upload Save</a>
         
     </div>
     <RouterView />
@@ -22,6 +23,7 @@ import HomeIcon from './components/Icons/HomeIcon.svg'
 import Work from './components/Icons/Work.svg'
 import Invoice from './components/Icons/Invoice.svg'
 import Upload from './components/Icons/Upload.svg'
+import Releases from './components/Icons/Releases.svg'
 import { userDict, saveChecker } from './main.js';
 import $ from 'jquery';
 export default {
@@ -116,6 +118,7 @@ export default {
     user-select: none;
     -webkit-tap-highlight-color: transparent;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 #nav > a:hover{
@@ -140,7 +143,7 @@ export default {
 .pageHome{
 	width: calc(100% - 60px);
     height: 100vh;
-    overflow-y: scroll;
+    overflow-y: auto;
     display: flex;
     justify-content: center;
     color: black;
