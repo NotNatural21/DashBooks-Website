@@ -6,8 +6,8 @@ import { RouterLink, RouterView } from 'vue-router'
         <div class="menuImg">
             <img :src="ArrowMenu" id="arrowMenuImg" @click="toggleMenu" class="rotate">
         </div>
-        <RouterLink to="/releases" @click="closeMenu" ><img :src="Releases"/>Releases</RouterLink>
         <RouterLink to="/" @click="closeMenu" ><img :src="HomeIcon"/>DashBoard</RouterLink>
+        <RouterLink to="/releases" @click="closeMenu" ><img :src="Releases"/>Releases</RouterLink>
         <RouterLink to="/projects" @click="closeMenu" ><img :src="Work"/>TimeSheets</RouterLink>
         <RouterLink to="/invoice" @click="closeMenu" ><img :src="Invoice"/>Invoice</RouterLink>
         <input type="file" ref="fileUpload" style="display: none" accept=".ssdb" @change="readFile()">

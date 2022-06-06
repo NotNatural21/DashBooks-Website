@@ -28,7 +28,8 @@ const router = createRouter({
         path: '/releases',
         name: 'releases',
         component: () => import('../views/ReleaseView.vue')
-    }
+    },
+    { path: '/:pathMatch(.*)*', name: 'home', component: HomeView },
   ]
 })
 
