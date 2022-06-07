@@ -34,7 +34,6 @@ export default {
                 cache: false,
                 success: function (data){
                     ref.update_data = data;
-                    console.log(ref.update_data)
                 },
                 error: function (xhr){
                     console.log("Error " + xhr.status + ", could not check for updates.");
