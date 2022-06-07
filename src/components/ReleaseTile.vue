@@ -30,6 +30,12 @@ export default {
             type: String,
             required: true
         },
+    },
+    data(){
+        return {
+            newSection: [],
+            FixesSection: []
+        }
     }
 }
 </script>
@@ -43,6 +49,7 @@ export default {
 
 h1{
     font-size: 25px;
+    line-height: unset;
 }
 h2{
     font-size: 17px;
